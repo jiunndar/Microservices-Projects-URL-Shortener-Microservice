@@ -12,7 +12,7 @@ const express = require('express');
 const mongo = require('mongodb');
 
 const dns = require('dns');
-const URL = require('url').URL;  // a module URL has utilities for URL resolution and parsing
+const URL = require('url').URL; 
 const app = express();
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
@@ -33,27 +33,24 @@ let db = mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUni
     console.log("connection to the DB successful");
 });
 
-// create a new Schema with following schema types
+
 const urlSchema = new mongoose.Schema({
   original_url: String,
   short_url: String
 }, {timestamps: true});
 
-// create a model that allows to create instance of objects--documents
+
 const Model = mongoose.model('shortURL', urlSchema);
 module.exports = Model;
 
-// this project needs to parse POST bodies--the body-parser mounted here
+
 let bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({extended: false}));  // configuration option to use the classic encoding
+app.use(bodyParser.urlencoded({extended: false}));  
 app.use(bodyParser.json())
 
-// to serve the static CSS file from the public folder by using the 
-// built-in middleware function in Express
+
 app.use('/', express.static(process.cwd() + '/public'));
 
-// routing--how the app responds to a client request to a particular endpoint
-// when the route is matched, the handler function is executed--responds with the index.html file
 app.get('/', (req, res) => {
   res.sendFile(process.cwd() + '/views/index.html');
 });
