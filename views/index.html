@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <title>URL Shortener Microservice | freeCodeCamp.org</title>
-    <link
-      rel="icon" 
-      type="image/png" 
-      href="https://cdn.freecodecamp.org/universal/favicons/favicon-16x16.png"
-    />
-    <link href="/public/style.css" rel="stylesheet" type="text/css" />
-  </head>
 
-  <body>
-    <h1>URL Shortener Microservice</h1>
-    <main>
-      <section>
+   <head>
+      <title>URL Shortener</title>
+
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+      <link href="/public/style.css" rel="stylesheet" type="text/css">
+   </head>
+
+   <body>
+      <div class="container">
+        <h2>API Project: URL Shortener Microservice</h2>
+        <h3>Short URL Creation </h3>
+        <p>
+          example: <code>POST https://project3-url-shortener-microservice-fcc.glitch.me/api/shorturl/new</code> - <code>https://www.google.com</code>
+        </p>
         <form action="api/shorturl/new" method="POST">
-          <fieldset>
-            <legend>URL Shortener</legend>
-            <label for="url_input">URL:</label>
-            <input id="url_input" type="text" name="url" placeholder="https://www.freecodecamp.org/" />
-            <input type="submit" value="POST URL" />
-          </fieldset>
+          <label for="url_input">URL to be shortened</label>
+          <input id="url_input" type="text" name="url" value="https://www.freecodecamp.org">
+          <input type="submit" value="POST URL">
         </form>
-      </section>
-    </main>
-    <footer>
-      <p>By <a href="https://www.freecodecamp.org/">freeCodeCamp</a></p>
-    </footer>
-  </body>
+        <h3>Example Usage:</h3>
+        <a href="https://project3-url-shortener-microservice-fcc.glitch.me/api/shorturl/40830">
+          https://project3-url-shortener-microservice-fcc.glitch.me/api/shorturl/40830
+        </a>
+
+        <h3>Will Redirect to:</h3>
+        <p>https://www.google.com/</p>
+      </div>
+      <div class="footer">
+        <p>
+          by <a href="https://www.freecodecamp.org">freeCodeCamp</a>
+        </p>
+      </div>
+   </body>
+
+
 </html>
