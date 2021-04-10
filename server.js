@@ -110,7 +110,7 @@ app.get('/api/shorturl/:urlToForward', (req, res, next) => {
   
   Model.findOne({short_url: shortenedURL}, (err, data) => {
     if (err) {
-      res.send("Error reading database.")
+      res.send("Unknown url")
     }
     res.redirect(301, data.original_url);
   });
