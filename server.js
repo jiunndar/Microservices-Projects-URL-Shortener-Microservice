@@ -35,8 +35,8 @@ let db = mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUni
 
 // create a new Schema with following schema types
 const urlSchema = new mongoose.Schema({
-  originalURL: String,
-  shortenedURL: String
+  original_url: String,
+  short_url: String
 }, {timestamps: true});
 
 // create a model that allows to create instance of objects--documents
@@ -68,7 +68,7 @@ app.post('/api/shorturl/new', (req, res, next) => {
   const originalURL = req.body.url;
 
   if (!urlIsValid(originalURL)) {
-    res.json({ "error": "URL invalid" });
+    res.json({ "error": "invalid url" });
 
   } else {
 
@@ -76,16 +76,16 @@ app.post('/api/shorturl/new', (req, res, next) => {
     dns.lookup(urlObject.hostname, (err,address,family) =>{
       if (err){
         res.json({
-          originalURL : originalURL,
-          shortenedURL: "Invalid URL"
+          original_url : originalURL,
+          short_url: "Invalid URL"
         });
 
       } else {
         let shortenedURL = Math.floor(Math.random()*100000).toString();
 
         let data = new Model({
-          originalURL: originalURL,
-          shortenedURL: shortenedURL
+          original_url: originalURL,
+          short_url: shortenedURL
         });
 
         data.save((err, data) =>{
@@ -95,8 +95,8 @@ app.post('/api/shorturl/new', (req, res, next) => {
         });
 
         res.json({
-          originalURL: originalURL,
-          shortenedURL: shortenedURL
+          original_url: originalURL,
+          short_url: shortenedURL
         })
       }
     })
@@ -108,11 +108,11 @@ app.post('/api/shorturl/new', (req, res, next) => {
 app.get('/api/shorturl/:urlToForward', (req, res, next) => {
   let shortenedURL = req.params.urlToForward;
   
-  Model.findOne({shortenedURL: shortenedURL}, (err, data) => {
+  Model.findOne({short_url: shortenedURL}, (err, data) => {
     if (err) {
       res.send("Error reading database.")
     }
-    res.redirect(301, data.originalURL);
+    res.redirect(301, data.original_url);
   });
 });
 
